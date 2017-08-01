@@ -27,9 +27,11 @@ export default class Task extends Component {
 
     return (
       <li className={taskClassName}>
-        <button className="delete" onClick={this.deleteThisTask.bind(this)}>
-          &times;
-        </button>
+        { this.props.showButtons ? (
+          <button className="delete" onClick={this.deleteThisTask.bind(this)}>
+            &times;
+          </button>
+        ) : ''}
 
         <input
           type="checkbox"
@@ -38,7 +40,7 @@ export default class Task extends Component {
           onClick={this.toggleChecked.bind(this)}
         />
 
-        { this.props.showPrivateButton ? (
+        { this.props.showButtons ? (
           <button className="toggle-private" onClick={this.togglePrivate.bind(this)}>
             { this.props.task.private ? 'Private' : 'Public' }
           </button>
@@ -56,5 +58,5 @@ Task.propTypes = {
   // This component gets the task to display through a React prop.
   // We can use propTypes to indicate it is required
   task: PropTypes.object.isRequired,
-  showPrivateButton: React.PropTypes.bool.isRequired,
+  showButtons: React.PropTypes.bool.isRequired,
 };
